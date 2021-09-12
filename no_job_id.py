@@ -1,14 +1,9 @@
-import time
 from time import sleep
 import csv
-import os
 from shutil import copyfile
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 
-global browser
 url = 'https://www.stepstone.de'
 links = ['https://www.stepstone.de/5/ergebnisliste.html?ke=product%20manager&suid=bd1c1f93-141b-4aa5-9003-f123a65c15fa&action=facet_selected%3Bsectors%3B21000&se=21000',
 'https://www.stepstone.de/5/ergebnisliste.html?ke=produktmanager&suid=dfd7e1b9-54f9-4187-b43d-97abf4677f61&action=facet_selected%3Bsectors%3B21000&se=21000',
@@ -118,6 +113,9 @@ if __name__ == "__main__":
         id = 0
         for link in links:
             id = main(main_link=link,id=id)
+        first.close()
+        second.close()
+        third.close()
         copyfile('./first.csv','ready_files/first.csv')
         copyfile('./second.csv','ready_files/second.csv')
         copyfile('./third.csv','ready_files/third.csv')
