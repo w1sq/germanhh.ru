@@ -24,3 +24,5 @@ onClosed@chrome://remote/content/marionette/server.js:209:17
 close@chrome://remote/content/marionette/transport.js:221:18
 onInputStreamReady@chrome://remote/content/marionette/transport.js:375:14
 
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
