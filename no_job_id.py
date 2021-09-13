@@ -34,6 +34,9 @@ fieldnames3 = ['id','profile']
 
 def process_page(link,i,id,all_locations,all_companies,all_jobs,writer1,writer2,writer3):
     browser.get(link)
+    button = browser.find_elements_by_css_selector('.at-exit-intent-modal-button')
+    if button:
+        button.click() 
     description = browser.find_elements_by_css_selector(".at-section-text-introduction-content")
     tasks = browser.find_elements_by_css_selector('.at-section-text-description-content')
     profile = browser.find_elements_by_css_selector('.at-section-text-profile-content')
