@@ -1,0 +1,26 @@
+1631541536847	geckodriver	INFO	Listening on 127.0.0.1:59142
+1631541539897	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "start-maximized" "--log-level=3" "user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4147.125 Safari/537.36" "--disable-extensions" "--no-sandbox" "--disable-dev-shm-usage" "--headless" "--disable-blink-features=AutomationControlled" "-foreground" "-no-remote" "-profile" "C:\\Users\\79152\\AppData\\Local\\Temp\\rust_mozprofilerIEsIn"
+*** You are running in headless mode.
+1631541540242	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\79152\\AppData\\Local\\Temp\\rust_mozprofilerIEsIn\\search.json.mozlz4", (void 0)))
+1631541542979	Marionette	INFO	Listening on port 59150
+1631541543137	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JkScribua/OE9CMGI1/PTA_B/UZ1PhoB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.stepstone.de/snrzdF/EbeHrL/A4/-nsj/d9NJXMgPY/pO1JEfcribua/OE9CMGI1/J3tET/VhfAUMB, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Marionette threw an error: NotFoundError: WindowGlobalParent.getActor: No such JSWindowActor 'MarionetteCommands'
+getMarionetteCommandsActorProxy/get/<@chrome://remote/content/marionette/actors/MarionetteCommandsParent.jsm:326:65
+unregisterCommandsActor@chrome://remote/content/marionette/actors/MarionetteCommandsParent.jsm:390:15
+GeckoDriver.prototype.deleteSession@chrome://remote/content/marionette/driver.js:2141:3
+onClosed@chrome://remote/content/marionette/server.js:209:17
+close@chrome://remote/content/marionette/transport.js:221:18
+onInputStreamReady@chrome://remote/content/marionette/transport.js:375:14
+

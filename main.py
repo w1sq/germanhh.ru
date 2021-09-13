@@ -21,7 +21,7 @@ firefox_options.add_argument('--disable-dev-shm-usage')
 firefox_profile = webdriver.FirefoxProfile()
 firefox_profile.set_preference('permissions.default.image', 2)
 firefox_profile.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
-#firefox_options.add_argument("--headless")
+firefox_options.add_argument("--headless")
 firefox_options.add_argument('--disable-blink-features=AutomationControlled')
 browser = webdriver.Firefox(executable_path='./geckodriver',options=firefox_options,firefox_profile=firefox_profile)
 browser.implicitly_wait(5)
@@ -105,6 +105,7 @@ def main(main_link,id=0):
     return id
 
 if __name__ == "__main__":
+    print('Script_has started')
     while True:
         first = open('./first.csv','w',encoding='utf-8',newline='')
         second = open('./second.csv','w',encoding='utf-8',newline='')
