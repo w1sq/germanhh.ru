@@ -16,14 +16,12 @@ firefox_options.add_argument('--log-level=3')
 firefox_options.add_argument(
             "user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4147.125 Safari/537.36")
 firefox_options.add_argument('--disable-extensions')
-prefs = {"profile.managed_default_content_settings.images": 2}
 firefox_options.add_argument('--no-sandbox')
 firefox_options.add_argument('--disable-dev-shm-usage')
-firefox_options.add_experimental_option("prefs", prefs)
 firefox_profile = webdriver.FirefoxProfile()
 firefox_profile.set_preference('permissions.default.image', 2)
 firefox_profile.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
-firefox_options.add_argument("--headless")
+#firefox_options.add_argument("--headless")
 firefox_options.add_argument('--disable-blink-features=AutomationControlled')
 browser = webdriver.Firefox(executable_path='./geckodriver',options=firefox_options,firefox_profile=firefox_profile)
 browser.implicitly_wait(5)
@@ -36,18 +34,18 @@ fieldnames3 = ['id','profile']
 
 def process_page(link,i,id,all_locations,all_companies,all_jobs,writer1,writer2,writer3):
     browser.get(link)
-    description = browser.find_elements_by_xpath("//div[contains(@class, 'at-section-text-introduction-content')]/p")
+    description = browser.find_elements_by_css_selector(".at-section-text-introduction-content")
     tasks = browser.find_elements_by_css_selector('.at-section-text-description-content')
     profile = browser.find_elements_by_css_selector('.at-section-text-profile-content')
-    if not description:
-        description = browser.find_elements_by_xpath("//div[contains(@class, 'at-section-text-introduction-content')]")
-        if not description:     
-            description =''
-            print('no_descr',link)
-        else:
-            description = description[0].text
+    # if not description:
+    #     description = browser.find_elements_by_xpath("//div[contains(@class, 'at-section-text-introduction-content')]")
+    if not description:     
+        description =''
+        print('no_descr',link)
     else:
         description = description[0].text
+    # else:
+    #     description = description[0].text
     if not profile:
         profile =''
         print('no_prof',link)
