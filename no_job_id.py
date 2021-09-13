@@ -1,7 +1,7 @@
 from time import sleep
 import csv
 from shutil import copyfile
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from selenium import webdriver
 
 url = 'https://www.stepstone.de'
@@ -9,22 +9,23 @@ links = ['https://www.stepstone.de/5/ergebnisliste.html?ke=product%20manager&sui
 'https://www.stepstone.de/5/ergebnisliste.html?ke=produktmanager&suid=dfd7e1b9-54f9-4187-b43d-97abf4677f61&action=facet_selected%3Bsectors%3B21000&se=21000',
 'https://www.stepstone.de/5/ergebnisliste.html?ke=Product%20Owner%2Fin&whattype=autosuggest&suid=1633092f-61ca-400b-bb76-fb6d2e214c83&action=facet_selected%3Bsectors%3B21000&se=21000'
     ]
-# os.remove('./first.csv')
-# os.remove('./second.csv')
-# os.remove('./third.csv')
-chrome_options = Options()
-chrome_options.add_argument("start-maximized")
-chrome_options.add_argument('--log-level=3')
-chrome_options.add_argument(
+
+firefox_options = Options()
+firefox_options.add_argument("start-maximized")
+firefox_options.add_argument('--log-level=3')
+firefox_options.add_argument(
             "user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4147.125 Safari/537.36")
-chrome_options.add_argument('--disable-extensions')
+firefox_options.add_argument('--disable-extensions')
 prefs = {"profile.managed_default_content_settings.images": 2}
-chrome_options.add_experimental_option("prefs", prefs)
-chrome_options.add_argument("--headless")
-chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-chrome_options.add_experimental_option('useAutomationExtension', False)
-browser = webdriver.Chrome(options=chrome_options, executable_path='./chromedriver')
+firefox_options.add_argument('--no-sandbox')
+firefox_options.add_argument('--disable-dev-shm-usage')
+firefox_options.add_experimental_option("prefs", prefs)
+firefox_profile = webdriver.FirefoxProfile()
+firefox_profile.set_preference('permissions.default.image', 2)
+firefox_profile.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+firefox_options.add_argument("--headless")
+firefox_options.add_argument('--disable-blink-features=AutomationControlled')
+browser = webdriver.Firefox(executable_path='./geckodriver',options=firefox_options,firefox_profile=firefox_profile)
 browser.implicitly_wait(5)
 browser.maximize_window()
 
