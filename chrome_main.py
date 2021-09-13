@@ -21,7 +21,7 @@ prefs = {"profile.managed_default_content_settings.images": 2}
 chrome_options. add_experimental_option("prefs", prefs)
 chrome_options.add_argument("--headless")
 chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-browser = webdriver.Chrome(executable_path='./geckodriver',options=chrome_options)
+browser = webdriver.Chrome(executable_path='./chromedriver',options=chrome_options)
 browser.implicitly_wait(5)
 
 fieldnames1 = ['id', 'job','city','company','description']
