@@ -5,9 +5,9 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 
 url = 'https://www.stepstone.de'
-links = ['https://www.stepstone.de/5/ergebnisliste.html?ke=product%20manager&suid=bd1c1f93-141b-4aa5-9003-f123a65c15fa&action=facet_selected%3Bsectors%3B21000&se=21000',
-'https://www.stepstone.de/5/ergebnisliste.html?ke=produktmanager&suid=dfd7e1b9-54f9-4187-b43d-97abf4677f61&action=facet_selected%3Bsectors%3B21000&se=21000',
-'https://www.stepstone.de/5/ergebnisliste.html?ke=Product%20Owner%2Fin&whattype=autosuggest&suid=1633092f-61ca-400b-bb76-fb6d2e214c83&action=facet_selected%3Bsectors%3B21000&se=21000'
+links = ['https://www.stepstone.de/5/ergebnisliste.html?ke=Product%20Owner%2Fin&whattype=autosuggest&suid=1633092f-61ca-400b-bb76-fb6d2e214c83&action=facet_selected%3Bsectors%3B21000&se=21000',
+'https://www.stepstone.de/5/ergebnisliste.html?ke=product%20manager&suid=bd1c1f93-141b-4aa5-9003-f123a65c15fa&action=facet_selected%3Bsectors%3B21000&se=21000',
+'https://www.stepstone.de/5/ergebnisliste.html?ke=produktmanager&suid=dfd7e1b9-54f9-4187-b43d-97abf4677f61&action=facet_selected%3Bsectors%3B21000&se=21000'
     ]
 
 chrome_options = Options()
@@ -18,8 +18,11 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options = webdriver.ChromeOptions()
 prefs = {"profile.managed_default_content_settings.images": 2}
-chrome_options. add_experimental_option("prefs", prefs)
+chrome_options.add_experimental_option("prefs", prefs)
 chrome_options.add_argument("--headless")
+chrome_options.add_argument("start-maximized")
+chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+chrome_options.add_experimental_option('useAutomationExtension', False)
 chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 browser = webdriver.Chrome(executable_path='./chromedriver',options=chrome_options)
 browser.implicitly_wait(5)
@@ -28,24 +31,19 @@ fieldnames1 = ['id', 'job','city','company','description']
 fieldnames2 = ['id','task']
 fieldnames3 = ['id','profile']
 
-
 def process_page(link,i,id,all_locations,all_companies,all_jobs,writer1,writer2,writer3):
     browser.get(link)
     button = browser.find_elements_by_css_selector('.at-exit-intent-modal-button')
     if button:
-        button.click() 
+        button[0].click() 
     description = browser.find_elements_by_css_selector(".at-section-text-introduction-content")
     tasks = browser.find_elements_by_css_selector('.at-section-text-description-content')
     profile = browser.find_elements_by_css_selector('.at-section-text-profile-content')
-    # if not description:
-    #     description = browser.find_elements_by_xpath("//div[contains(@class, 'at-section-text-introduction-content')]")
     if not description:     
         description =''
         print('no_descr',link)
     else:
         description = description[0].text
-    # else:
-    #     description = description[0].text
     if not profile:
         profile =''
         print('no_prof',link)
@@ -75,30 +73,29 @@ def process_blocks(link):
     return all_locations,all_companies,all_jobs_names,all_links
 
 def main(main_link,id=0):
-    global browser
     browser.get(main_link)
-    try:
-        button = browser.find_element_by_xpath('//*[@id="ccmgt_explicit_accept"]')
-        button.click()
-    except Exception:
-        pass
-    count = browser.find_element_by_xpath("//span[@class='at-facet-header-total-results']").text
-    if '.' in count:
-        count = count.replace('.','')
-    count = int(count)
-    if count/25-count//25 > 0:
-        count =count//25+1
-    else:
-        count = count//25
-
-
+    print(browser.page_source)
+    button = browser.find_elements_by_xpath('//*[@id="ccmgt_explicit_accept"]')
+    if button:
+        button[0].click()
+    # count = browser.find_element_by_css_selector(".at-facet-header-total-results").text
+    # print(count)
+    # if '.' in count:
+    #     count = count.replace('.','')
+    # count = int(count)
+    # if count/25-count//25 > 0:
+    #     count =count//25+1
+    # else:
+    #     count = count//25
     id = id
-    for page in range(1,count):
+    page = 1
+    while browser.find_element_by_xpath('//a[@data-at="pagination-next"]').get_attribute('href'):
         blocks_link = main_link+f'&page={page}'
         all_locations,all_companies,all_jobs,all_links = process_blocks(blocks_link)
         for i,link in enumerate(all_links):
             process_page(link,i,id,all_locations,all_companies,all_jobs,writer1,writer2,writer3)
             id += 1
+        page += 1
     return id
 
 if __name__ == "__main__":
