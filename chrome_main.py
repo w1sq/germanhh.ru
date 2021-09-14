@@ -17,7 +17,8 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 prefs = {"profile.managed_default_content_settings.images": 2}
 chrome_options.add_experimental_option("prefs", prefs)
-chrome_options.add_argument("--headless")
+#chrome_options.add_argument("--headless")
+chrome_options.add_argument('--log-level=3')
 chrome_options.add_argument("start-maximized")
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_experimental_option('useAutomationExtension', False)
@@ -75,28 +76,27 @@ def process_blocks(link):
 
 def main(main_link,id=0):
     browser.get(main_link)
-    print(browser.page_source)
     button = browser.find_elements_by_xpath('//*[@id="ccmgt_explicit_accept"]')
     if button:
         button[0].click()
-    # count = browser.find_element_by_css_selector(".at-facet-header-total-results").text
-    # print(count)
-    # if '.' in count:
-    #     count = count.replace('.','')
-    # count = int(count)
-    # if count/25-count//25 > 0:
-    #     count =count//25+1
-    # else:
-    #     count = count//25
+    count = browser.find_element_by_css_selector(".at-facet-header-total-results").text
+    print(count)
+    if '.' in count:
+        count = count.replace('.','')
+    count = int(count)
+    if count/25-count//25 > 0:
+        count =count//25+1
+    else:
+        count = count//25
     id = id
     page = 1
-    while browser.find_element_by_xpath('//a[@data-at="pagination-next"]').get_attribute('href'):
+    for page in range(1, count):
+    #while browser.find_element_by_xpath('//a[@data-at="pagination-next"]').get_attribute('href'):
         blocks_link = main_link+f'&page={page}'
         all_locations,all_companies,all_jobs,all_links = process_blocks(blocks_link)
         for i,link in enumerate(all_links):
             process_page(link,i,id,all_locations,all_companies,all_jobs,writer1,writer2,writer3)
             id += 1
-        page += 1
     return id
 
 if __name__ == "__main__":
